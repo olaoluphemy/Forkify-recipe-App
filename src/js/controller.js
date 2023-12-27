@@ -91,17 +91,34 @@ const initializeBookmarks = function () {
 };
 
 const controlUploadRecipe = async function (formData) {
-  await model.uploadRecipe(formData);
+  try {
+    await model.uploadRecipe(formData);
 
-  recipeView.render(model.state.recipe);
-  const id = `#${model.state.recipe.id}`;
+    recipeView.render(model.state.recipe);
+    const id = `#${model.state.recipe.id}`;
 
-  window.history.pushState(null, "", id);
-  addRecipeView.renderMessage();
+    window.history.pushState(null, "", id);
+    addRecipeView.renderMessage();
 
-  setTimeout(function () {
-    addRecipeView.toggleWindow();
-  }, 2000);
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, 2000);
+
+    // reset form
+    setTimeout(function () {
+      addRecipeView.render();
+    }, 3000);
+  } catch (err) {
+    addRecipeView.renderError(err);
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, 2000);
+
+    // reset form
+    setTimeout(function () {
+      addRecipeView.render();
+    }, 3000);
+  }
 };
 
 const init = function () {

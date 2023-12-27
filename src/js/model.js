@@ -118,7 +118,8 @@ export const uploadRecipe = async function (formData) {
     const ingredients = formData
       .filter((ing) => ing[0].startsWith("ingredient") && ing[1] !== "")
       .map((ing) => {
-        if (ing[1].split(",").length !== 3) throw new Error("invalid format");
+        if (ing[1].split(",").length !== 3)
+          throw new Error("invalid format, please try again :(");
         const ings = ing[1].trim().split(",");
         return {
           quantity: ings[0] || null,
