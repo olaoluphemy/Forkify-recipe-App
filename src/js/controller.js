@@ -22,7 +22,6 @@ const controlRecipes = async function () {
     // 2) Rendering recipe
     recipeView.render(model.state.recipe);
     resultsView.update(model.state.search.recipes);
-    console.log(model.state.search.recipes);
 
     // 3) Render bookmarks
     if (model.state.bookmarks.length === 0) return;
